@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-	<meta charset="UTF-8">
-	<title>乐淘电商</title>
-	<meta name="viewport"
-				content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	<link rel="stylesheet" href="./lib/bootstrap/css/bootstrap.css">
-	<link rel="stylesheet" href="./lib/bootstrap-validator/css/bootstrapValidator.min.css">
-	<link rel="stylesheet" href="./lib/nprogress/nprogress.css">
-	<!-- 引入自己的 css -->
-	<link rel="stylesheet" href="./css/common.css">
+  <meta charset="UTF-8">
+  <title>乐淘电商</title>
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="./lib/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="./lib/bootstrap-validator/css/bootstrapValidator.min.css">
+  <link rel="stylesheet" href="./lib/nprogress/nprogress.css">
+  <!-- 引入自己的 css -->
+  <link rel="stylesheet" href="./css/common.css">
 </head>
 <body>
 
@@ -28,7 +28,7 @@
   <div class="nav">
     <ul>
       <li>
-        <a href="user.html"><i class="glyphicon glyphicon-user"></i><span>用户管理</span></a>
+        <a class="active" href="user.html"><i class="glyphicon glyphicon-user"></i><span>用户管理</span></a>
       </li>
       <li>
         <a href="javascript:;" class="category"><i class="glyphicon glyphicon-list"></i><span>分类管理</span></a>
@@ -61,14 +61,25 @@
     <!-- 链接导航 -->
     <ol class="breadcrumb">
       <li><a href="index.html">管理系统</a></li>
-      <li class="active">首页</li>
+      <li class="active">用户管理</li>
     </ol>
 
     <div class="content">
 
-      <div class="echarts_left pull-left"></div>
-
-      <div class="echarts_right pull-right"></div>
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>序号</th>
+            <th>用户名</th>
+            <th>手机号</th>
+            <th>状态</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- 挖个坑 -->
+        </tbody>
+      </table>
 
     </div>
 
@@ -101,6 +112,33 @@
   </div>
 </div>
 
+<!--
+  type="text/html"
+  type="text/template"  两中都可以
+  作用都是标记当前 script 标签为 html 模板
+-->
+<script type="text/html" id="tmp">
+  {{ each rows v i }}
+    <tr>
+      <td>{{ i + 1 }}</td>
+      <td>{{ v.username }}</td>
+      <td>{{ v.mobile }}</td>
+      <!-- isDelete 用于标记当前用户状态
+           1 表示当前用户是 启用状态
+           0 表示当前用户是 禁用状态
+      -->
+      <td>{{ v.isDelete === 1 ? "正常" : "已禁用" }}</td>
+      <td>
+        {{ if v.isDelete === 1 }}
+          <button class="btn btn-danger">禁用</button>
+        {{ else }}
+          <button class="btn btn-success">启用</button>
+        {{ /if }}
+      </td>
+    </tr>
+  {{ /each }}
+</script>
+
 
 
 
@@ -108,12 +146,11 @@
 <script src="./lib/bootstrap/js/bootstrap.min.js"></script>
 <script src="./lib/bootstrap-validator/js/bootstrapValidator.js"></script>
 <script src="./lib/nprogress/nprogress.js"></script>
-<!-- 引入的是完整版 -->
-<script src="./lib/echarts/echarts.min.js"></script>
+<script src="./lib/artTemplate/template-web.js"></script>
 <!-- 判断用户登录状态 -->
 <script src="./js/checkLogin.js"></script>
 <script src="./js/common.js"></script>
-<script src="./js/index.js"></script>
+<script src="./js/user.js"></script>
 
 </body>
 </html>
