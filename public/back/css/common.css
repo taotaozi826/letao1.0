@@ -163,3 +163,9 @@ a:active {
 }
 
 
+.It_content tbody img {
+    width: auto;
+    height: 50px;
+    margin: 0 auto;
+}
+

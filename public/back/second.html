@@ -64,6 +64,31 @@
             <li><a href="#">分类管理</a></li>
             <li class="active">二级分类</li>
         </ol>
+        
+        <button class="mb_20 btn btn-default">添加分类</button>
+        <table class="table-hover table table-bordered">
+            <thead>
+            <tr>
+                <th>序号</th>
+                <th>一级分类名称</th>
+                <th>二级分类名称</th>
+                <th>二级分类LOGO</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1</td>
+                <td>女士官</td>
+                <td>阿迪达斯</td>
+                <td>ss</td>
+            </tr>
+            </tbody>
+        </table>
+        
+        <!--准备分页容器-->
+        <div class="text-right">
+            <ul id="paginator"></ul>
+        </div>
     </div>
 </div>
 
@@ -89,12 +114,26 @@
 </div>
 
 
-
+<script type="text/html" id="secondTmp">
+    {{each rows v i}}
+    <tr>
+        <td>{{i+1+(page-1)*size}}</td>
+        <td>{{v.categoryName}}</td>
+        <td>{{v.brandName}}</td>
+        <td>
+            <img src="{{v.brandLogo}}" alt="">
+        </td>
+    </tr>
+    {{/each}}
+</script>
 
 <script src="./lib/jquery/jquery.min.js"></script>
 <script src="./lib/bootstrap/js/bootstrap.min.js"></script>
 <script src="./lib/bootstrap-validator/js/bootstrapValidator.min.js"></script>
 <script src="./lib/nprogress/nprogress.js"></script>
+<script src="./lib/artTemplate/template-web.js"></script>
+<script src="./lib/bootstrap-paginator/bootstrap-paginator.min.js"></script>
+<script src="./js/second.js"></script>
 <script src="./js/checkOut.js"></script>
 <script src="./js/common.js"></script>
 </body>
