@@ -81,11 +81,40 @@
         </tbody>
       </table>
 
+      <!-- 为分页准备一个容器 -->
+      <div class="text-right">
+        <ul id="paginator"></ul>
+      </div>
+
     </div>
 
   </div>
 
 </div>
+
+
+<!-- 启用禁用模态框 -->
+<div id="userModal" class="modal fade" tabindex="-1">
+  <!-- modal-sm 小   modal-lg 大    默认中等  -->
+  <div class="modal-dialog modal-sm">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">温馨提示</h4>
+      </div>
+      <div class="modal-body">
+        <p class="red"><i class="glyphicon glyphicon-info-sign"></i>你确定要执行此操作吗？</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary" id="submitBtn">确定</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 
 
 
@@ -120,7 +149,8 @@
 <script type="text/html" id="tmp">
   {{ each rows v i }}
     <tr>
-      <td>{{ i + 1 }}</td>
+      <!-- (i+1) + 前面的页数*每页的条数 -->
+      <td>{{ (i + 1) + (page-1)*size }}</td>
       <td>{{ v.username }}</td>
       <td>{{ v.mobile }}</td>
       <!-- isDelete 用于标记当前用户状态
@@ -128,7 +158,7 @@
            0 表示当前用户是 禁用状态
       -->
       <td>{{ v.isDelete === 1 ? "正常" : "已禁用" }}</td>
-      <td>
+      <td data-id="{{ v.id }}">
         {{ if v.isDelete === 1 }}
           <button class="btn btn-danger">禁用</button>
         {{ else }}
@@ -147,6 +177,7 @@
 <script src="./lib/bootstrap-validator/js/bootstrapValidator.js"></script>
 <script src="./lib/nprogress/nprogress.js"></script>
 <script src="./lib/artTemplate/template-web.js"></script>
+<script src="./lib/bootstrap-paginator/bootstrap-paginator.min.js"></script>
 <!-- 判断用户登录状态 -->
 <script src="./js/checkLogin.js"></script>
 <script src="./js/common.js"></script>
